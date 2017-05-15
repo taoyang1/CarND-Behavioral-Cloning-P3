@@ -118,11 +118,11 @@ To capture good driving behavior, I first recorded 6 laps on track one using cen
 
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover from drift to the left or the right. These images show what a recovery looks like starting from the left or right.
 
-** Recover from left **
+**Recover from left**
 
 ![alt text][image3]
 
-** Recover from right **
+**Recover from right**
 
 ![alt text][image4]
 
