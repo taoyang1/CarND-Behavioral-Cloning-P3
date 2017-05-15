@@ -119,9 +119,11 @@ To capture good driving behavior, I first recorded 6 laps on track one using cen
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to recover from drift to the left or the right. These images show what a recovery looks like starting from the left or right.
 
 ** Recover from left **
+
 ![alt text][image3]
 
 ** Recover from right **
+
 ![alt text][image4]
 
 
@@ -142,7 +144,7 @@ I used this training data for training the model. The validation set helped dete
 
 ## Evaluation Video
 
-The final testing video is in [this]() git repository. Note **TWO** laps of autonomous driving is captured.
+The final testing video is in [this](https://github.com/taoyang1/CarND-Behavioral-Cloning-P3) git repository. Note **TWO** laps of autonomous driving is captured.
 
 
 ```python
