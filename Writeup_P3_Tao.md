@@ -110,11 +110,11 @@ The final model architecture (model.py lines 83-99) consisted of a convolution n
 8. A dropout layer with rate = 0.4.
 9. A conv2d layer with 3*3 filter sizes, stride of 1, depth of 64 and a RELU activation layer.
 10. A dropout layer with rate = 0.4.
-11. A fully connected layer with 100 outputs (model.py line 90).
+11. A fully connected layer with 100 outputs.
 12. A dropout layer with rate = 0.3.
-13. A fully connected layer with 50 outputs (model.py line 91).
-14. A fully connected layer with 10 outputs (model.py line 92).
-15. Final output with 1 continuous output being the steering angle (model.py line 93).
+13. A fully connected layer with 50 outputs.
+14. A fully connected layer with 10 outputs.
+15. Final output with 1 continuous output being the steering angle.
 
 
 #### 3. Creation of the Training Set & Training Process
