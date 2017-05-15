@@ -8,7 +8,7 @@ import cv2
 import numpy as np
 from keras.models import Sequential
 from keras.layers import Flatten, Dense, Lambda, Cropping2D
-from keras.layers import Conv2D, MaxPooling2D, Activation
+from keras.layers import Conv2D, MaxPooling2D, Activation, Dropout
 import os
 import sklearn
 from sklearn.model_selection import train_test_split
@@ -48,18 +48,21 @@ def generator(samples, batch_size=128):
             for batch_sample in batch_samples:
                 center_name = 'Data/IMG/'+batch_sample[0].split('/')[-1]
                 center_image = cv2.imread(center_name)
+                center_image = cv2.cvtColor(center_image,cv2.COLOR_BGR2RGB)
                 center_angle = float(batch_sample[3])
                 images.append(center_image)
                 angles.append(center_angle)
                 
                 left_name = 'Data/IMG/'+batch_sample[1].split('/')[-1]
                 left_image = cv2.imread(left_name)
+                left_image = cv2.cvtColor(left_image,cv2.COLOR_BGR2RGB)
                 left_angle = float(batch_sample[3]) + correction
                 images.append(left_image)
                 angles.append(left_angle)
                 
                 right_name = 'Data/IMG/'+batch_sample[2].split('/')[-1]
                 right_image = cv2.imread(right_name)
+                right_image = cv2.cvtColor(right_image,cv2.COLOR_BGR2RGB)
                 right_angle = float(batch_sample[3]) - correction
                 images.append(right_image)
                 angles.append(right_angle)
@@ -67,7 +70,6 @@ def generator(samples, batch_size=128):
             X_train = np.array(images)
             y_train = np.array(angles)
             yield sklearn.utils.shuffle(X_train, y_train)
-
 
 # In[5]:
 
@@ -84,10 +86,14 @@ model.add(Cropping2D(cropping=((55,25),(0,0))))
 model.add(Conv2D(24,5,5,subsample=(2,2),activation="relu"))
 model.add(Conv2D(36,5,5,subsample=(2,2),activation="relu"))
 model.add(Conv2D(48,5,5,subsample=(2,2),activation="relu"))
+model.add(Dropout(0.4))
 model.add(Conv2D(64,3,3,activation="relu"))
+model.add(Dropout(0.4))
 model.add(Conv2D(64,3,3,activation="relu"))
+model.add(Dropout(0.4))
 model.add(Flatten())
 model.add(Dense(100))
+model.add(Dropout(.3))
 model.add(Dense(50))
 model.add(Dense(10))
 model.add(Dense(1))
@@ -96,7 +102,7 @@ model.add(Dense(1))
 # In[7]:
 
 model.compile(loss='mse', optimizer='adam')
-history_object = model.fit_generator(train_generator, samples_per_epoch=3*len(train_samples), validation_data=validation_generator, nb_val_samples=3*len(validation_samples), nb_epoch=3)
+history_object = model.fit_generator(train_generator, samples_per_epoch=3*len(train_samples), validation_data=validation_generator, nb_val_samples=3*len(validation_samples), nb_epoch=5)
 
 
 # In[8]:
